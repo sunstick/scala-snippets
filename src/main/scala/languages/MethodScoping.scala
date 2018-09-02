@@ -16,30 +16,13 @@ package top.middle {
 
     def publicScope: Unit = {} // least restrictive
 
-    protected def inheritanceScope: Unit = {} // special, can only referred as super
+    protected def protectedScope: Unit = {} // special, can only referred as super
 
     def illustrate(other: A): Unit = {
       // other.instanceScope, commented because of compile error
       this.instanceScope
       other.classScope
     }
-  }
-
-}
-
-package another {
-
-  object Test {
-    val a = new A
-    // a.topScope, commented because of compile error
-    a.publicScope
-  }
-
-  object B extends A {
-    val a = new A
-    a.publicScope
-    //a.inheritanceScope, commented because of compile error
-    super.inheritanceScope
   }
 
 }
