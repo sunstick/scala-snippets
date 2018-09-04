@@ -2,7 +2,7 @@ package languages.oo
 
 import scala.annotation.tailrec
 
-case class Rational(n: Int, d: Int) {
+case class Rational(n: Int, d: Int) extends Ordered[Rational] {
   require(d != 0, "denominator cannot be zero")
 
   private[this] val g = gcd(n.abs, d.abs)
@@ -59,6 +59,9 @@ case class Rational(n: Int, d: Int) {
       numer == that.numer && denom == that.denom && isPos == that.isPos
     case _ => false
   }
+
+  override def compare(that: Rational): Int =
+    (numer * that.denom) - (that.numer * denom)
 }
 
 object Rational {
